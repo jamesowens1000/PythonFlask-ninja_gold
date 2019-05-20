@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ninja Money</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <style>
+            #main{
+                height: 500px;
+                width: 1000px;
+                margin: 50px;
+                border: 1px solid black;
+            }
+            #top p, #top input{
+                width: 80px;
+                margin-left: 35px;
+                margin-top: 20px;
+                display: inline-block;
+                font-weight: bold;
+            }
+            #form1{
+                float: right;
+                margin-top: 15px;
+                margin-right: 45px;
+            }
+            .forms{
+                height: 200px;
+                width: 200px;
+                margin-left: 35px;
+                padding-top: 35px;
+                border: 1px solid black;
+                display: inline-block;
+                text-align: center;
+            }
+            #bottom{
+                margin-left: 35px;
+                margin-top: 20px;
+            }
+            #bottom textarea{
+                height: 135px;
+                width: 925px;
+                resize: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <div id="top">
+                <p>Your Gold:</p><input type="text" name="gold_amount" value="{{gold}}" readonly>
+                <form id="form1" action="/destroy" method="post">
+                    <button type="submit">Reset Game</button>
+                </form>
+            </div>
+            <form class="forms" action='/process_money' method='post'>
+                <h5>Farm</h5>
+                <p>(earns 10-20 golds)</p>
+                <input type="submit" value="Find Gold!">
+                <input type="hidden" name="location" value="farm">
+            </form>
+            <form class="forms" action='/process_money' method='post'>
+                <h5>Cave</h5>
+                <p>(earns 5-10 golds)</p>
+                <input type="submit" value="Find Gold!">
+                <input type="hidden" name="location" value="cave">
+            </form>
+            <form class="forms" action='/process_money' method='post'>
+                <h5>House</h5>
+                <p>(earns 2-5 golds)</p>
+                <input type="submit" value="Find Gold!">
+                <input type="hidden" name="location" value="house">
+            </form>
+            <form class="forms" action='/process_money' method='post'>
+                <h5>Casino</h5>
+                <p>(earns/takes 0-50 golds)</p>
+                <input type="submit" value="Find Gold!">
+                <input type="hidden" name="location" value="casino">
+            </form>
+            <div id="bottom">
+                <p>Activities:</p>
+                <textarea name="activity" readonly>
+                    {% for msg in messages: %}
+                        {{ msg }}
+                    {% endfor %}
+                </textarea>
+            </div>
+        </div>
+    </body>
+</html>
